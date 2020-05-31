@@ -10,6 +10,45 @@
 	});
 
 	/**
+	Function to redirect to the appstore of the corresponding SO
+	*/
+	
+
+	function getMobileOperatingSystem() {
+		var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+	
+		// Windows Phone must come first because its UA also contains "Android"
+		if (/windows phone/i.test(userAgent)) {
+			return "Windows Phone";
+		}
+	
+		if (/android/i.test(userAgent)) {
+			return "Android";
+		}
+	
+		// iOS detection from: http://stackoverflow.com/a/9039885/177710
+		if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+			return "iOS";
+		}
+	
+		return "unknown";
+	}
+
+
+	var os = getMobileOperatingSystem();
+	if(os == "Android")
+	{
+		// similar behavior as clicking on a link
+		console.log("Android");
+		window.location.href = "https://play.google.com/store/apps/details?id=com.b2bg.barrelboom";
+	}
+	else if(os == "iOS")
+	{
+		console.log("iOS");
+		window.location.href = "https://apps.apple.com/us/app/barrel-boom-dizzy-puzzle/id1493148485?ls=1";
+	}
+
+	/**
 	 * Applies parallax scrolling to an element's background image.
 	 * @return {jQuery} jQuery object.
 	 */
